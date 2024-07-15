@@ -1,43 +1,57 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
+# Flutter/Dart/Pub関連の設定ファイル
+.dart_tool/
+.packages
+.pub-cache/
+build/
+flutter_*.png
 
-# IntelliJ related
+# ローカル設定ファイル
 *.iml
 *.ipr
 *.iws
 .idea/
+.metadata
+*.swp
+*.lock
+*.log
+*.tmp
+*.temp
+*.DS_Store
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Android関連のファイル
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/local.properties
+android/key.properties
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+# iOS関連のファイル
+ios/Flutter/.last_build_id
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/App.framework
+ios/ServiceDefinitions.json
+ios/Runner.xcworkspace/
+ios/GoogleService-Info.plist  # Firebase設定ファイルを無視
+*.xcuserstate
 
-# Symbolication related
-app.*.symbols
+# VS Code関連のファイル
+.vscode/
 
-# Obfuscation related
-app.*.map.json
+# Intellij関連のファイル
+.idea/
+*.iml
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Firebase設定ファイル
+firebase.json
+.firebaserc
+functions/node_modules/
+functions/lib/
+functions/coverage/
+functions/.env  # 環境変数ファイルを無視
+firebase-debug.log
+
+# 環境変数ファイル
+.env
+.env.*
