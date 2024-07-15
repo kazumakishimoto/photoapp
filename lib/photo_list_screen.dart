@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photoapp/photo_view_screen.dart';
 
 class PhotoListScreen extends StatefulWidget {
   @override
@@ -36,10 +37,14 @@ class _PhotoListScreenState extends State<PhotoListScreen> {
         // 表示が切り替わったとき
         onPageChanged: (int index) => _onPageChanged(index),
         children: [
-          //「全ての画像」を表示する部分
-          PhotoGridView(),
-          //「お気に入り登録した画像」を表示する部分
-          PhotoGridView(),
+          PhotoGridView(
+            // コールバックを設定しタップした画像のURLを受け取る
+            onTap: (imageURL) => _onTapPhoto(imageURL),
+          ),
+          PhotoGridView(
+            // コールバックを設定しタップした画像のURLを受け取る
+            onTap: (imageURL) => _onTapPhoto(imageURL),
+          ),
         ],
       ),
       // 画像追加ボタン
@@ -97,9 +102,26 @@ class _PhotoListScreenState extends State<PhotoListScreen> {
       _currentIndex = index;
     });
   }
+
+  void _onTapPhoto(String imageURL) {
+    // 最初に表示する画像のURLを指定して、画像詳細画面に切り替える
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PhotoViewScreen(imageURL: imageURL),
+      ),
+    );
+  }
 }
 
 class PhotoGridView extends StatelessWidget {
+  const PhotoGridView({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+
+  // onTapプロパティを追加
+  final Function(String) onTap;
+
   @override
   Widget build(BuildContext context) {
     // ダミー画像一覧
@@ -132,13 +154,10 @@ class PhotoGridView extends StatelessWidget {
               height: double.infinity,
               // Widgetをタップ可能にする
               child: InkWell(
-                onTap: () => {},
-                // URLを指定して画像を表示
+                // タップしたらコールバックを実行する
+                onTap: () => onTap(imageURL),
                 child: Image.network(
                   imageURL,
-                  // 画像の表示の仕方を調整できる
-                  //  比率は維持しつつ余白が出ないようにするので cover を指定
-                  //  https://api.flutter.dev/flutter/painting/BoxFit-class.html
                   fit: BoxFit.cover,
                 ),
               ),
